@@ -367,6 +367,10 @@ def save_flow_layout():
 
 # ─── STATUS ───────────────────────────────────────────────────────────────────
 
+@app.route('/health')
+def health_check():
+    return jsonify({"status": "ok"}), 200
+
 @app.route('/api/status')
 @login_required
 def get_status():
