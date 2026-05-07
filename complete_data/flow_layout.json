@@ -1,0 +1,30 @@
+{
+  "nodes": [
+    {
+      "id": "nmma69klbxl2",
+      "type": "rs485",
+      "refId": null,
+      "x": 86,
+      "y": 99
+    },
+    {
+      "id": "nmma69rof5rz",
+      "type": "device",
+      "refId": 1,
+      "x": 376,
+      "y": 254
+    }
+  ],
+  "connections": [
+    {
+      "id": "cmma6bmfwbyv",
+      "fromNodeId": "nmma69klbxl2",
+      "toNodeId": "nmma69rof5rz",
+      "fromPort": "bottom",
+      "toPort": "left"
+    }
+  ],
+  "panX": 0,
+  "panY": 0,
+  "scale": 1
+}

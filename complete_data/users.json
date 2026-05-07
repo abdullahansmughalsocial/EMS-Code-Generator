@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": "66526a20-288c-426e-84f4-d1152373a463",
+      "username": "admin",
+      "password": "scrypt:32768:8:1$s2CNyWKRuZXSYE5N$2ced0a4f33fa0f5b13013e0a4b15b4367a5f80d623593fd295ef9147a00ba83eb9a189e84056a7346f365e9c23b5daa08db6b2fe08810213517b3589991dbd74",
+      "role": "admin",
+      "display_name": "Administrator",
+      "created_at": "2026-03-02T15:22:27.549156",
+      "active": true
+    }
+  ]
+}

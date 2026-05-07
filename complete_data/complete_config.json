@@ -1,0 +1,83 @@
+{
+  "version": "1.0",
+  "last_saved": "2026-03-03T10:35:16.680022",
+  "devices": [
+    {
+      "device_name": "Grid",
+      "unit_id": 1,
+      "array_name": "Grid",
+      "pou_name": "Zone1_EM02",
+      "device_number": 1,
+      "meter_model": "ABB_M4M",
+      "fb_name": "FB_ABB_M4M",
+      "communication_type": "RS485",
+      "gateway_name": ""
+    }
+  ],
+  "meter_models": {
+    "ABB_M4M": [
+      {
+        "meter_model": "ABB_M4M",
+        "array_name": "",
+        "data_type": "Realtime",
+        "start_address": 0,
+        "quantity": 50,
+        "function_code": "16#03",
+        "comment": ""
+      },
+      {
+        "meter_model": "ABB_M4M",
+        "array_name": "",
+        "data_type": "Energy",
+        "start_address": 1000,
+        "quantity": 24,
+        "function_code": "16#04",
+        "comment": ""
+      }
+    ]
+  },
+  "gateways": [
+    {
+      "name": "Gateway1",
+      "ip_address": "192.168.1.1",
+      "port": 502,
+      "description": ""
+    },
+    {
+      "name": "Gateway2",
+      "ip_address": "192.168.1.2",
+      "port": 502,
+      "description": ""
+    }
+  ],
+  "rs485_config": {
+    "com_port": "COM1",
+    "baud_rate": 9600,
+    "parity": "N",
+    "stop_bits": 1,
+    "timeout_ms": 1000,
+    "delay_ms": 9
+  },
+  "pou_mappings": {
+    "Zone1_EM02": [
+      {
+        "pou_name": "Zone1_EM02",
+        "input_array": "Realtime",
+        "output_variable": "Grid_PhaseVoltage_L1",
+        "mapping_fb_out": "PhaseVoltage_L1",
+        "row_number": 0
+      },
+      {
+        "pou_name": "Zone1_EM02",
+        "input_array": "Realtime",
+        "output_variable": "Grid_PhaseVoltage_L2",
+        "mapping_fb_out": "PhaseVoltage_L2",
+        "row_number": 0
+      }
+    ]
+  },
+  "pou_instances": {
+    "Zone1_EM02": "fbZone1_EM02_inst"
+  },
+  "tag_configs": []
+}

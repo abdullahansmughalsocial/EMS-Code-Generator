@@ -1,0 +1,42 @@
+{
+  "fb_id": "ecfd0934-4ff9-4c7d-ad9d-81e3ac518f9f",
+  "meter_model": "ABB_M4M",
+  "fb_name": "FB_ABB_M4M",
+  "created_at": "2026-03-03T10:33:05.806809",
+  "arrays": {
+    "Realtime": {
+      "size": 50,
+      "comment": "Registers for Realtime",
+      "start_address": 0,
+      "function_code": "16#03"
+    },
+    "Energy": {
+      "size": 24,
+      "comment": "Registers for Energy",
+      "start_address": 1000,
+      "function_code": "16#04"
+    }
+  },
+  "mappings": [
+    {
+      "name": "PhaseVoltage_L1",
+      "type": "dword_real",
+      "description": "PhaseVoltage_L1",
+      "data_type": "REAL",
+      "array": "Realtime",
+      "start": 0,
+      "scale": 0.01
+    },
+    {
+      "name": "PhaseVoltage_L2",
+      "type": "dword_signed",
+      "description": "PhaseVoltage_L2",
+      "data_type": "REAL",
+      "array": "Realtime",
+      "start": 0,
+      "scale": 0.01
+    }
+  ],
+  "has_swap": false,
+  "parameters": []
+}

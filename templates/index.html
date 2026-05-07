@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PLC & CODESYS Generator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Share+Tech+Mono&family=Saira:wght@300;400;500;600;700&family=Orbitron:wght@400;600;700;900&family=IBM+Plex+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+<!-- BACKGROUND LAYERS -->
+<div class="bg-scene">
+  <div class="bg-img"></div>
+  <div class="bg-overlay"></div>
+  <div class="bg-grid"></div>
+  <div class="bg-scanlines"></div>
+</div>
+
+<!-- SIDEBAR -->
+<nav class="sidebar" id="sidebar">
+  <div class="sidebar-brand">
+    <div class="brand-icon"><i class="fa-solid fa-bolt-lightning"></i></div>
+    <div class="brand-text">
+      <span class="brand-name">PLCGEN</span>
+      
+    </div>
+    <button class="sidebar-pin-btn" id="sidebar-collapse-btn" title="Collapse">
+      <i class="fa-solid fa-chevron-left"></i>
+    </button>
+  </div>
+
+  <div class="sidebar-status-bar" id="sidebar-status">
+    <div class="status-dot" id="status-dot"></div>
+    <span id="status-label">Initializing...</span>
+  </div>
+
+  <ul class="sidebar-nav" id="sidebar-nav">
+    <li class="nav-group-label">SYSTEM</li>
+    <li><a href="#dashboard" class="nav-link" data-page="dashboard">
+      <span class="nav-icon"><i class="fa-solid fa-gauge-high"></i></span>
+      <span class="nav-label">Dashboard</span>
+    </a></li>
+    <li><a href="#flow" class="nav-link" data-page="flow">
+      <span class="nav-icon"><i class="fa-solid fa-diagram-project"></i></span>
+      <span class="nav-label">Flow Editor</span>
+    </a></li>
+
+    <li class="nav-group-label">CONFIGURATION</li>
+    <li><a href="#devices" class="nav-link" data-page="devices">
+      <span class="nav-icon"><i class="fa-solid fa-microchip"></i></span>
+      <span class="nav-label">Devices</span>
+      <span class="nav-count" id="nc-devices"></span>
+    </a></li>
+    <li><a href="#models" class="nav-link" data-page="models">
+      <span class="nav-icon"><i class="fa-solid fa-layer-group"></i></span>
+      <span class="nav-label">Meter Models</span>
+      <span class="nav-count" id="nc-models"></span>
+    </a></li>
+    <li><a href="#fbs" class="nav-link" data-page="fbs">
+      <span class="nav-icon"><i class="fa-solid fa-cube"></i></span>
+      <span class="nav-label">Function Blocks</span>
+      <span class="nav-count" id="nc-fbs"></span>
+    </a></li>
+    <li><a href="#mappings" class="nav-link" data-page="mappings">
+      <span class="nav-icon"><i class="fa-solid fa-right-left"></i></span>
+      <span class="nav-label">POU Mappings</span>
+    </a></li>
+    <li><a href="#tags" class="nav-link" data-page="tags">
+      <span class="nav-icon"><i class="fa-solid fa-cloud-bolt"></i></span>
+      <span class="nav-label">Cloud Tags</span>
+      <span class="nav-count" id="nc-tags"></span>
+    </a></li>
+
+    <li class="nav-group-label">NETWORK</li>
+    <li><a href="#comm" class="nav-link" data-page="comm">
+      <span class="nav-icon"><i class="fa-solid fa-network-wired"></i></span>
+      <span class="nav-label">Communication</span>
+    </a></li>
+
+    <li class="nav-group-label">TOOLS</li>
+    <li><a href="#import" class="nav-link" data-page="import">
+      <span class="nav-icon"><i class="fa-solid fa-file-import"></i></span>
+      <span class="nav-label">Import Data</span>
+    </a></li>
+    <li><a href="#generate" class="nav-link" data-page="generate">
+      <span class="nav-icon"><i class="fa-solid fa-terminal"></i></span>
+      <span class="nav-label">Generate Code</span>
+    </a></li>
+    <li><a href="#backups" class="nav-link" data-page="backups">
+      <span class="nav-icon"><i class="fa-solid fa-database"></i></span>
+      <span class="nav-label">Backups</span>
+    </a></li>
+
+    <li class="nav-group-label nav-admin-only" style="display:none">ADMIN</li>
+    <li class="nav-admin-only" style="display:none">
+      <a href="#users" class="nav-link" data-page="users">
+        <span class="nav-icon"><i class="fa-solid fa-users-gear"></i></span>
+        <span class="nav-label">User Management</span>
+      </a>
+    </li>
+  </ul>
+
+  <div class="sidebar-footer">
+    <div class="mini-stats" id="mini-stats"></div>
+    <div class="sidebar-user-card" id="sidebar-user-card">
+      <div class="sidebar-user-avatar" id="sidebar-user-avatar">A</div>
+      <div class="sidebar-user-info">
+        <div class="sidebar-user-name" id="sidebar-user-name">User</div>
+        <div class="sidebar-user-role" id="sidebar-user-role">admin</div>
+      </div>
+    </div>
+    <div class="sidebar-footer-btns">
+      <button class="theme-toggle-btn" id="theme-toggle" title="Switch theme">
+        <i class="fa-solid fa-moon" id="theme-icon-side"></i>
+        <span id="theme-label-side">Dark Mode</span>
+      </button>
+      <button class="logout-btn" id="logout-btn" title="Sign Out">
+        <i class="fa-solid fa-right-from-bracket"></i>
+        <span>Sign Out</span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main" id="main-content">
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger" id="hamburger">
+        <i class="fa-solid fa-bars"></i>
+      </button>
+      <div class="breadcrumb-trail">
+        <i class="fa-solid fa-house-signal" style="color:var(--accent);font-size:.75rem;"></i>
+        <span class="breadcrumb-sep">›</span>
+        <span class="breadcrumb" id="breadcrumb">Dashboard</span>
+      </div>
+    </div>
+    <div class="topbar-center">
+      <div class="sys-status-badge">
+        <span class="sys-dot anim-pulse"></span>
+        <span class="sys-label">SYSTEM ONLINE</span>
+        
+      </div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-stats" id="topbar-stats"></div>
+      <button class="tb-action-btn" onclick="App.exportData()" title="Export">
+        <i class="fa-solid fa-file-export"></i><span>Export</span>
+      </button>
+      <div style="position:relative">
+        <button class="tb-action-btn tb-danger" onclick="App.showResetMenu()" id="reset-btn">
+          <i class="fa-solid fa-rotate-left"></i><span>Reset</span>
+        </button>
+        <div class="reset-menu" id="reset-menu">
+          <div class="reset-menu-item" onclick="App.resetDevices()">
+            <i class="fa-solid fa-microchip"></i> Reset Devices &amp; Tags
+          </div>
+          <div class="reset-menu-item danger" onclick="App.resetAll()">
+            <i class="fa-solid fa-triangle-exclamation"></i> Reset All Data
+          </div>
+        </div>
+      </div>
+      <button class="theme-toggle-topbar" id="theme-toggle-top" title="Toggle theme">
+        <i class="fa-solid fa-moon" id="theme-icon-top"></i>
+      </button>
+    </div>
+  </header>
+
+  <main class="content" id="page-content">
+    <div class="loading-screen">
+      <div class="loading-ring"><div></div><div></div><div></div><div></div></div>
+      <p>Initializing system...</p>
+    </div>
+  </main>
+</div>
+
+<!-- MODALS -->
+<div class="modal-backdrop" id="modal-backdrop">
+  <div class="modal" id="modal">
+    <div class="modal-header">
+      <h3 id="modal-title">Modal</h3>
+      <button class="modal-close" id="modal-close"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+    <div class="modal-footer" id="modal-footer"></div>
+  </div>
+</div>
+
+<div class="modal-backdrop" id="code-backdrop">
+  <div class="modal modal-wide" id="code-modal">
+    <div class="modal-header">
+      <h3 id="code-modal-title">Code Preview</h3>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="btn btn-xs btn-accent" id="code-copy-btn"><i class="fa-solid fa-copy"></i> Copy</button>
+        <button class="btn btn-xs btn-outline" id="code-download-btn"><i class="fa-solid fa-download"></i> Download</button>
+        <button class="modal-close" id="code-modal-close"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+    </div>
+    <div class="modal-body" style="padding:0">
+      <pre class="code-viewer" id="code-viewer"></pre>
+    </div>
+  </div>
+</div>
+
+<div class="toast-container" id="toast-container"></div>
+
+<div class="modal-backdrop" id="confirm-backdrop">
+  <div class="modal modal-sm" id="confirm-modal">
+    <div class="modal-header">
+      <h3 id="confirm-title">Confirm</h3>
+    </div>
+    <div class="modal-body"><p id="confirm-message"></p></div>
+    <div class="modal-footer">
+      <button class="btn btn-outline" id="confirm-cancel"><i class="fa-solid fa-ban"></i> Cancel</button>
+      <button class="btn btn-danger" id="confirm-ok"><i class="fa-solid fa-check"></i> Confirm</button>
+    </div>
+  </div>
+</div>
+
+<script src="/static/js/app.js"></script>
+<script src="/static/js/theme.js"></script>
+</body>
+</html>
